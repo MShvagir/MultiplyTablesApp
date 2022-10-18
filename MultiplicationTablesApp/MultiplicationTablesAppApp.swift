@@ -2,16 +2,25 @@
 //  MultiplicationTablesAppApp.swift
 //  MultiplicationTablesApp
 //
-//  Created by Марина Швагирь on 17.10.2022.
+//  Created by Romy Shvagir
 //
 
 import SwiftUI
 
 @main
 struct MultiplicationTablesAppApp: App {
+    
+    @StateObject var launchScreenManager = LaunchScreenManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                ContentView()
+                if launchScreenManager.state != .completed {
+                    LaunchScreenView()
+                }
+            }
+            .environmentObject(launchScreenManager)
         }
     }
 }
