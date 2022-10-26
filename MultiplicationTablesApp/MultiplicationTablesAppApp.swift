@@ -15,7 +15,7 @@ struct MultiplicationTablesAppApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                ContentView()
+                StartView()
                 if launchScreenManager.state != .completed {
                     LaunchScreenView()
                 }

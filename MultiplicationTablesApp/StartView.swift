@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct StartView: View {
     
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     
@@ -68,7 +68,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        StartView()
             .environmentObject(LaunchScreenManager())
     }
 }
