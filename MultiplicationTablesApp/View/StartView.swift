@@ -36,8 +36,9 @@ struct StartView: View {
                             }
                             .offset(x: -25, y: -120)
                         }
-                        Button {
-                            //
+                        
+                            NavigationLink {
+                                PracticeView()
                         } label: {
                             Text("Start".uppercased())
                                 .font(.title3)
@@ -60,7 +61,7 @@ struct StartView: View {
                         }
                 }
                     .navigationTitle("Home")
-                    .navigationBarHidden(true)
+                   .navigationBarHidden(true)
                     
         }
     }
