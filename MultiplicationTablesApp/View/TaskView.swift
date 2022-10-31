@@ -18,6 +18,8 @@ struct TaskView: View {
     @State private var title: String = ""
     @State private var totalScore = UserDefaults.standard.integer(forKey: "Tap")
     @State private var isTouched: Bool = false
+    @State private var isOver: Bool = false
+    @State private var counterOfQuestions: Int = 0
    
     
     var body: some View {
@@ -119,6 +121,11 @@ struct TaskView: View {
             } message: {
                 Text("Your score is \(totalScore)")
         }
+        .alert("Good job, my friend", isPresented: $isOver) {
+                    Button("OK", action: reset)
+                } message: {
+                    Text("Game over! Play again :)")
+                }
     }
     
     func multiply(userAnswer: String) {
@@ -130,6 +137,10 @@ struct TaskView: View {
             title = "wrong"
             totalScore -= 1
         }
+        counterOfQuestions += 1
+        if counterOfQuestions == numberOfQuestions {
+            isOver.toggle()
+        }
     }
     
     func askQuestion() {
@@ -137,13 +148,19 @@ struct TaskView: View {
         userAnswer = ""
     }
     
+    func reset() {
+        totalScore = 0
+        counterOfQuestions = 0
+        askQuestion()
+        UserDefaults.standard.set(self.totalScore, forKey: "Tap")
+    }
 }
 
 
 
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskView(userNumber: 7, numberOfQuestions: 8)
+        TaskView(userNumber: 3, numberOfQuestions: 5)
     }
 }
 
