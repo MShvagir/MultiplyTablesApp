@@ -60,10 +60,10 @@
 		D81E58B228FD392C004ED4B7 /* MultiplicationTablesApp */ = {
 			isa = PBXGroup;
 			children = (
-				D81E58C128FD3AF3004ED4B7 /* Info.plist */,
 				D81E58B328FD392C004ED4B7 /* MultiplicationTablesAppApp.swift */,
+				D885A998290EE6F80064490B /* Model */,
 				D885A995290D40EE0064490B /* View */,
-				D885A99128FE8FAA0064490B /* LaunchScreenManager.swift */,
+				D81E58C128FD3AF3004ED4B7 /* Info.plist */,
 				D81E58B728FD392D004ED4B7 /* Assets.xcassets */,
 				D81E58B928FD392D004ED4B7 /* Preview Content */,
 			);
@@ -87,6 +87,14 @@
 				D885A996290D41260064490B /* TaskView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D885A998290EE6F80064490B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D885A99128FE8FAA0064490B /* LaunchScreenManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
