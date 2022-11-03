@@ -14,6 +14,7 @@ struct PracticeView: View {
     @State private var userNumber: Int = 4
     @State private var isTouched = false
     @State private var numberOfQuestions: Int = 10
+    @State private var isAnimating: Bool = false
     
     
     init() {
@@ -117,12 +118,18 @@ struct PracticeView: View {
                 }
                 .font(.title)
                 .foregroundColor(.white)
+                .scaleEffect(isAnimating ? 1 : 0.6)
             }
             .ignoresSafeArea()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     self.navigationBarHidden(true)
                 }
+        }
+            .onAppear {
+                withAnimation(.easeOut(duration: 0.5)) {
+                    isAnimating.toggle()
+            }
         }
     }
 }

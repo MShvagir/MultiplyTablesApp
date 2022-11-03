@@ -16,10 +16,14 @@ struct TaskView: View {
     @State private var userAnswer: String = ""
     @State private var isAlert: Bool = false
     @State private var title: String = ""
-    @State private var totalScore = UserDefaults.standard.integer(forKey: "Tap")
+    @State private var totalScore = UserDefaults.standard.integer(forKey: "Score")
     @State private var isTouched: Bool = false
     @State private var isOver: Bool = false
     @State private var counterOfQuestions: Int = 0
+    @State private var isResetedTotalScore: Bool = false
+    @State private var isAnimating: Bool = false
+
+   
    
     
     var body: some View {
@@ -34,8 +38,11 @@ struct TaskView: View {
                    Text("\(totalScore)")
                         .font(.largeTitle)
                 }
-                Text("Score".uppercased())
-                    .font(.headline)
+                .onTapGesture {
+                    isResetedTotalScore.toggle()
+                }
+                Text("Total Score".uppercased())
+                    .font(.caption)
             }
             .foregroundColor(.white)
             .offset(x: 150, y: -370)
@@ -73,7 +80,7 @@ struct TaskView: View {
                             .background(.white)
                             .cornerRadius(25)
                         .frame(width: 170, height: 170)
-                    withAnimation(.spring()) {
+                    withAnimation(.spring().repeatForever()) {
                     Text("\(randomNumber)")
                         .font(.system(size: 130, weight: .bold, design: .rounded))
                         .foregroundColor(Color(#colorLiteral(red: 0.8221660256, green: 0.1875290871, blue: 0.03009820357, alpha: 1)))
@@ -93,12 +100,12 @@ struct TaskView: View {
                     .padding(.horizontal, 70)
                 Divider().padding(10)
                 Button {
-                     multiply(userAnswer: userAnswer)
+                    multiply(userAnswer: userAnswer)
                     withAnimation(.easeOut) {
                     isAlert.toggle()
                     isTouched.toggle()
                     }
-                    UserDefaults.standard.set(self.totalScore, forKey: "Tap")
+                    UserDefaults.standard.set(self.totalScore, forKey: "Score")
                 } label: {
                     Text("Check".uppercased())
                         .font(.title2)
@@ -111,21 +118,43 @@ struct TaskView: View {
                             .stroke(Color.white, lineWidth: 2.0)
                         )
                 }
+                .disabled(userAnswer == "" ? true : false)
                 .padding(.top, 5)
                 .padding(.bottom, -50)
             }
+            .scaleEffect(isAnimating ? 1 : 0.6)
         }
         .ignoresSafeArea()
         .alert("You are \(title)", isPresented: $isAlert) {
-            Button("Continue", action: askQuestion)
-            } message: {
-                Text("Your score is \(totalScore)")
+            Button {
+                askQuestion()
+                isAnimating.toggle()
+            } label: {
+                Text("Continue")
+            }
+        } message: {
+                Text("You answered \(counterOfQuestions) out of \(numberOfQuestions)")
         }
         .alert("Good job, my friend", isPresented: $isOver) {
                     Button("OK", action: reset)
                 } message: {
-                    Text("Game over! Play again :)")
+                    Text("Game over! You answered \(counterOfQuestions) questions. Play again :)")
                 }
+        .alert("Reset your total score?", isPresented: $isResetedTotalScore) {
+                    Button(role: .destructive) {
+                        resetTotalScore()
+                    } label: {
+                        Text("Reset")
+                    }
+                }
+        .onAppear {
+            withAnimation(.easeOut(duration: 0.5)) {
+                isAnimating.toggle()
+            }
+        }
+        .onDisappear(perform: {
+            counterOfQuestions = 0
+            })
     }
     
     func multiply(userAnswer: String) {
@@ -146,13 +175,17 @@ struct TaskView: View {
     func askQuestion() {
         randomNumber = Int.random(in: 2...10)
         userAnswer = ""
+        isAnimating.toggle()
     }
     
     func reset() {
-        totalScore = 0
         counterOfQuestions = 0
         askQuestion()
-        UserDefaults.standard.set(self.totalScore, forKey: "Tap")
+        isAlert = false
+    }
+    
+    func resetTotalScore() {
+        totalScore = 0
     }
 }
 
