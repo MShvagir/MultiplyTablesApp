@@ -29,109 +29,98 @@ struct TaskView: View {
     var body: some View {
         ZStack {
             Color("launchScreenBackground")
-            VStack(alignment: .center, spacing: 3) {
-                HStack {
-                Image("owl")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 30, height: 30, alignment: .topTrailing)
-                   Text("\(totalScore)")
-                        .font(.largeTitle)
-                }
-                .onTapGesture {
+                .ignoresSafeArea()
+            VStack {
+            VStack {
+                Button {
                     isResetedTotalScore.toggle()
+                } label: {
+                    Image("owl")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 30)
+                    Text("\(totalScore)")
+                        .font(.largeTitle)
                 }
                 Text("Total Score".uppercased())
                     .font(.caption)
             }
+            .frame(maxWidth: .infinity, alignment: .topTrailing)
             .foregroundColor(.white)
-            .offset(x: 150, y: -370)
+            .padding(.horizontal, 20)
+            .confirmationDialog("Are you sure?", isPresented: $isResetedTotalScore) {
+                Button("Reset", role: .destructive) {
+                    resetTotalScore()
+                }
+            } message: {
+                Text("Reset your score?")
+            }
             VStack(spacing: 5) {
                 ZStack {
-                    Image("giraffe")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 160, height: 160)
-                        .offset(x: -90, y: -40)
-                RoundedRectangle(cornerRadius: 25)
-                        .strokeBorder(Color(#colorLiteral(red: 0.8221660256, green: 0.1875290871, blue: 0.03009820357, alpha: 1)), lineWidth: 3)
-                        .background(.white)
-                        .cornerRadius(25)
-                    .frame(width: 170, height: 170)
-                    withAnimation(.spring()) {
+                    PetView(pet: "giraffe", x: -90, y: -40)
+                    RoundedRectangle(cornerRadius: 25)
+                        .strokeBorder(Color("Bordo"), lineWidth: 3)
+                        .modifier(RoundedRectangleModifier())
                     Text("\(userNumber)")
-                        .font(.system(size: 130, weight: .bold, design: .rounded))
-                        .foregroundColor(Color(#colorLiteral(red: 0.8221660256, green: 0.1875290871, blue: 0.03009820357, alpha: 1)))
-                    }
-                    .rotationEffect(Angle(degrees: isTouched ? 360 : 0))
+                        .font(.system(size: 110, weight: .bold, design: .rounded))
+                        .foregroundColor(Color("Bordo"))
+                        .rotationEffect(Angle(degrees: isTouched ? 360 : 0))
                 }
                 Image(systemName: "multiply")
-                    .foregroundColor(.white)
-                    .font(.system(size: 100, weight: .bold, design: .rounded))
-                    .padding()
+                    .modifier(SignModifier())
                 ZStack {
-                    Image("rabbit")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 160, height: 160)
-                        .offset(x: 90, y: -40)
+                    PetView(pet: "rabbit", x: 80, y: -40)
                     RoundedRectangle(cornerRadius: 25)
-                        .strokeBorder(Color(#colorLiteral(red: 0.8221660256, green: 0.1875290871, blue: 0.03009820357, alpha: 1)), lineWidth: 3)
-                            .background(.white)
-                            .cornerRadius(25)
-                        .frame(width: 170, height: 170)
-                    withAnimation(.spring().repeatForever()) {
+                        .strokeBorder(Color("Bordo"), lineWidth: 3)
+                        .modifier(RoundedRectangleModifier())
                     Text("\(randomNumber)")
-                        .font(.system(size: 130, weight: .bold, design: .rounded))
-                        .foregroundColor(Color(#colorLiteral(red: 0.8221660256, green: 0.1875290871, blue: 0.03009820357, alpha: 1)))
-                    }
-                    .rotationEffect(Angle(degrees: isTouched ? 360 : 0))
+                        .font(.system(size: 110, weight: .bold, design: .rounded))
+                        .foregroundColor(Color("Bordo"))
+                        .rotationEffect(Angle(degrees: isTouched ? 360 : 0))
                 }
                 Image(systemName: "equal")
-                    .foregroundColor(.white)
-                    .font(.system(size: 100, weight: .bold, design: .rounded))
-                    .padding()
+                    .modifier(SignModifier())
                 TextField("Enter your answer", text: $userAnswer)
                     .keyboardType(.numberPad)
-                    .padding()
-                    .background(Color(#colorLiteral(red: 1, green: 0.6679218411, blue: 0.4736531973, alpha: 1)).opacity(0.7).cornerRadius(25))
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Color("LightOrange").opacity(0.6).cornerRadius(25))
                     .foregroundColor(.white)
                     .font(.title2)
                     .padding(.horizontal, 70)
-                Divider().padding(10)
+                    .padding(20)
+                Divider()
+                    .padding(.bottom, 10)
                 Button {
                     multiply(userAnswer: userAnswer)
-                    withAnimation(.easeOut) {
-                    isAlert.toggle()
-                    isTouched.toggle()
-                    }
                     UserDefaults.standard.set(self.totalScore, forKey: "Score")
+                    withAnimation(.easeOut) {
+                        isAlert.toggle()
+                        isTouched.toggle()
+                    }
                 } label: {
                     Text("Check".uppercased())
                         .font(.title2)
-                        .bold()
-                        .foregroundColor(Color.white)
-                        .padding()
-                        .padding(.horizontal, 10)
-                        .background(
-                        Capsule()
-                            .stroke(Color.white, lineWidth: 2.0)
-                        )
+                        .modifier(ButtonModifier())
                 }
                 .disabled(userAnswer == "" ? true : false)
-                .padding(.top, 5)
-                .padding(.bottom, -50)
             }
             .scaleEffect(isAnimating ? 1 : 0.6)
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .ignoresSafeArea()
+        
         .alert("You are \(title)", isPresented: $isAlert) {
             Button {
+                withAnimation(.spring()) {
                 askQuestion()
                 isAnimating.toggle()
+                }
             } label: {
                 Text("Continue")
             }
+            .transition(.scale)
         } message: {
                 Text("You answered \(counterOfQuestions) out of \(numberOfQuestions)")
         }
@@ -140,21 +129,15 @@ struct TaskView: View {
                 } message: {
                     Text("Game over! You answered \(counterOfQuestions) questions. Play again :)")
                 }
-        .alert("Reset your total score?", isPresented: $isResetedTotalScore) {
-                    Button(role: .destructive) {
-                        resetTotalScore()
-                    } label: {
-                        Text("Reset")
-                    }
-                }
         .onAppear {
-            withAnimation(.easeOut(duration: 0.5)) {
+            withAnimation(.default) {
                 isAnimating.toggle()
             }
         }
-        .onDisappear(perform: {
+        .onDisappear {
             counterOfQuestions = 0
-            })
+            }
+        
     }
     
     func multiply(userAnswer: String) {
@@ -182,13 +165,14 @@ struct TaskView: View {
         counterOfQuestions = 0
         askQuestion()
         isAlert = false
+        isAnimating.toggle()
     }
     
     func resetTotalScore() {
         totalScore = 0
+        UserDefaults.standard.set(self.totalScore, forKey: "Score")
     }
 }
-
 
 
 struct TaskView_Previews: PreviewProvider {
@@ -198,3 +182,18 @@ struct TaskView_Previews: PreviewProvider {
 }
 
 
+
+struct PetView: View {
+    
+    var pet: String
+    var x: CGFloat
+    var y: CGFloat
+    
+    var body: some View {
+        Image(pet)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 160, height: 160)
+            .offset(x: x, y: y)
+    }
+}

@@ -15,6 +15,7 @@
 		D885A99228FE8FAA0064490B /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885A99128FE8FAA0064490B /* LaunchScreenManager.swift */; };
 		D885A99429091E800064490B /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885A99329091E800064490B /* PracticeView.swift */; };
 		D885A997290D41260064490B /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885A996290D41260064490B /* TaskView.swift */; };
+		D8EBF96229182F6D009EF165 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EBF96129182F6D009EF165 /* CustomModifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D885A99128FE8FAA0064490B /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		D885A99329091E800064490B /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
 		D885A996290D41260064490B /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		D8EBF96129182F6D009EF165 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				D81E58B328FD392C004ED4B7 /* MultiplicationTablesAppApp.swift */,
+				D8EBF96129182F6D009EF165 /* CustomModifiers.swift */,
 				D885A998290EE6F80064490B /* Model */,
 				D885A995290D40EE0064490B /* View */,
 				D81E58C128FD3AF3004ED4B7 /* Info.plist */,
@@ -172,6 +175,7 @@
 				D81E58B428FD392C004ED4B7 /* MultiplicationTablesAppApp.swift in Sources */,
 				D885A997290D41260064490B /* TaskView.swift in Sources */,
 				D885A99228FE8FAA0064490B /* LaunchScreenManager.swift in Sources */,
+				D8EBF96229182F6D009EF165 /* CustomModifiers.swift in Sources */,
 				D81E58C328FD5D71004ED4B7 /* LaunchScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,8 +314,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -342,8 +345,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
