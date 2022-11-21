@@ -4,7 +4,6 @@ I think guessing normal country flags is so boring, so I created this easy game 
 Win-win (:
 <br>
 <br>
-https://user-images.githubusercontent.com/81764938/203024904-80f77d4f-1747-49c2-ada8-c2ff73496aca.mp4
 <img align = "left" src="https://user-images.githubusercontent.com/81764938/203022771-fd6fe7a7-07a6-45cd-a622-2da3d47159ce.png" width="250">
 <img align = "left" src="https://user-images.githubusercontent.com/81764938/203023167-0eab64f6-9379-4bda-a2aa-5d17d197f1fb.png" width="250">
 <img align = "left" src="https://user-images.githubusercontent.com/81764938/203023192-cf2f5e47-e73b-4b7e-aa7f-a024dec1166e.png" width="250">
